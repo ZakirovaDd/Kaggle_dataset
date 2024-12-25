@@ -72,3 +72,7 @@ sns.boxplot(data=df_train[selected_attributes], orient="h")
 grph.title('Boxplot of Selected Attribuites')
 grph.show()
 	#Heatmap
+grph.figure(figsize=(15, 10))
+sns.heatmap(df_train.corr(), annot=True, fmt='.2f', cmap='Pastel2', linewidths=2)
+grph.title('Correlation Heatmap')
+grph.show()
