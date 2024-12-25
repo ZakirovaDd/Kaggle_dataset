@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 import kagglehub
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 import seaborn as sns
 import scipy.stats as stats
 from sklearn.model_selection import (
@@ -51,21 +51,11 @@ df_train.describe()
 	#Hue
 sns.set(style="whitegrid")
 plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df_train, x='ClimateChange', y='FloodProbability', hue='Deforestation', palette='Set1')
-plt.title('FloodProbability vs. ClimateChange by Deforestation')
-plt.xlabel('ClimateChange')
-plt.ylabel('FloodProbability')
-plt.legend(title='Deforestation',loc='upper right')
-plt.gcf().set_facecolor('lightgrey') 
-plt.show()
-	#
-sns.set(style="whitegrid")
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df_train, x='PoliticalFactors', y='FloodProbability', hue='Deforestation', palette='Set1')
-plt.title('FloodProbability vs. Political Factors by Deforestation')
+sns.scatterplot(data=df_train, x='PoliticalFactors', y='FloodProbability', hue='Urbanization', palette='Set1')
+plt.title('FloodProbability vs. Political Factors by Urbanization')
 plt.xlabel('PoliticalFactors')
 plt.ylabel('FloodProbability')
-plt.legend(title='Deforestation',loc='upper right')
+plt.legend(title='Urbanization',loc='upper right')
 plt.gcf().set_facecolor('lightgrey') 
 plt.show()
 	#
@@ -73,3 +63,12 @@ ax1=df_train.plot(kind='scatter', x='Urbanization', y='FloodProbability', color=
 ax2=df_train.plot(kind='scatter', x='PoliticalFactors', y='FloodProbability', color='g', label='ClimateChange', ax=ax1)
 ax1.set_ylabel('FloodProbability')
 ax1.set_xlabel(' ')
+	#Box Plot
+selected_attributes = df_train.select_dtypes(include=['int64', 'float64']).columns.drop('id')
+selected_attributes
+from matplotlib import pyplot as grph 
+grph.figure(figsize=(15, 10))
+sns.boxplot(data=df_train[selected_attributes], orient="h")
+grph.title('Boxplot of Selected Attribuites')
+grph.show()
+	#Heatmap
