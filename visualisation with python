@@ -1,0 +1,75 @@
+import numpy as np
+import pandas as pd
+import os
+import kagglehub
+import matplotlib.pyplot as plt
+import seaborn as sns
+import scipy.stats as stats
+from sklearn.model_selection import (
+    train_test_split,
+    KFold,
+    StratifiedKFold,
+    RepeatedStratifiedKFold,
+    RandomizedSearchCV
+)
+from sklearn.pipeline import Pipeline, make_pipeline
+from sklearn.preprocessing import (
+    StandardScaler,
+    OrdinalEncoder,
+    OneHotEncoder
+)
+from sklearn.impute import SimpleImputer
+from sklearn.metrics import (
+    classification_report,
+    mean_squared_error,
+    mean_absolute_error,
+    r2_score
+)
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers, callbacks, Model, Sequential
+from tensorflow.keras.layers import (
+    Dense,
+    Dropout,
+    Input,
+    Lambda,
+    Concatenate,
+    Add,
+    BatchNormalization,
+    LeakyReLU,
+    ELU
+)
+from tensorflow.keras.models import load_model
+from tensorflow.keras.optimizers import Adam, RMSprop, SGD
+from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
+from keras.optimizers import Adam, RMSprop, SGD
+	
+	df_train = pd.read_csv('/kaggle/input/......dataset/train.csv/train.csv')
+df_train.head()
+df_train.columns.tolist()
+df_train.describe()
+	#Hue
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_train, x='ClimateChange', y='FloodProbability', hue='Deforestation', palette='Set1')
+plt.title('FloodProbability vs. ClimateChange by Deforestation')
+plt.xlabel('ClimateChange')
+plt.ylabel('FloodProbability')
+plt.legend(title='Deforestation',loc='upper right')
+plt.gcf().set_facecolor('lightgrey') 
+plt.show()
+	#
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df_train, x='PoliticalFactors', y='FloodProbability', hue='Deforestation', palette='Set1')
+plt.title('FloodProbability vs. Political Factors by Deforestation')
+plt.xlabel('PoliticalFactors')
+plt.ylabel('FloodProbability')
+plt.legend(title='Deforestation',loc='upper right')
+plt.gcf().set_facecolor('lightgrey') 
+plt.show()
+	#
+ax1=df_train.plot(kind='scatter', x='Urbanization', y='FloodProbability', color='r', label='Urbanization')
+ax2=df_train.plot(kind='scatter', x='PoliticalFactors', y='FloodProbability', color='g', label='ClimateChange', ax=ax1)
+ax1.set_ylabel('FloodProbability')
+ax1.set_xlabel(' ')
